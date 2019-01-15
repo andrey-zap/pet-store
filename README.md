@@ -37,7 +37,7 @@ This project was initialized by running ``./bin/springboot pet-services``
 
 To build the application and run the unit & integration tests, execute:
 ```
-./mvnw clean install
+mvn clean install
 ```
 After importing the project in your IDE, you can run the tests under ``src/test/java/com/fywss/spring/petservices``:
 
@@ -49,7 +49,7 @@ After importing the project in your IDE, you can run the tests under ``src/test/
 To start the pet-services backend, execute:
 
 ```
-./mvnw spring-boot:run
+mvn spring-boot:run
 ```
 
 or

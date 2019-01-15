@@ -18,24 +18,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import javax.servlet.http.*;
 
 import io.swagger.annotations.ApiOperation;
 
 @ControllerAdvice
 @RestController
-@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:5000", "https://steve-petstore.cfapps.io", "https://devops.fywss.com"})
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping ("/apis/v1/pets")
 public class PetController {
 	
 	@Autowired
 	private PetService service;
-	
+
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@GetMapping
 	@ApiOperation (value = "Get all Pets", notes = "Returns a List of Pet records", response = Pet.class, responseContainer = "List")
-	public List<Pet> findAll() {
+	public List<Pet> findAll(HttpServletResponse  response) {
+	    response.setHeader("Location", "http://google.com");
 		return service.findAll();
 	}
-	
+
 	@GetMapping(value = "/{id}")
 	@ApiOperation(value = "Gets one Pet based on id", notes = "Returns a single Pet record", response = Pet.class)
 	public Optional<Pet> findById(@PathVariable Long id) {
